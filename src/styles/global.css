@@ -1,0 +1,418 @@
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 1) Tailwind’s directives */
+/* ──────────────────────────────────────────────────────────────────────────── */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 2) Base resets & typography */
+/* ──────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  html, body {
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE 10+ */
+  }
+  body::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+}
+
+:root {
+  --font-sans: 'Poppins', sans-serif;
+  --primary: 315,100%,50%;
+  --secondary: 264,100%,50%;
+  --base: #000;
+  --text: #fff;
+  --gradient-from: #111827;
+  --gradient-via:  #5b21b6;
+  --gradient-to:   #312e81;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+a, button, h1, p {
+  text-decoration: none;
+}
+
+a { cursor: pointer !important; }
+
+img {
+  user-select: none;
+  pointer-events: none;
+}
+
+.selectable p {
+  user-select: text;
+  cursor: text;
+}
+
+input, button, a, div {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Autofill color preservation */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text) !important;
+  transition: background-color 999999s ease-in-out 0s;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 3) Keyframes */
+/* ──────────────────────────────────────────────────────────────────────────── */
+@keyframes static {
+  to { background-position: 100% 100%; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes gradient-move {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 4) Utility & component styles */
+/* ──────────────────────────────────────────────────────────────────────────── */
+.perspective      { perspective: 1000px; }
+.preserve-3d      { transform-style: preserve-3d; }
+.rotate-y-180     { transform: rotateY(180deg); }
+.backface-hidden  { backface-visibility: hidden; }
+
+.noise {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background-image: url("/noise.png");
+  background-repeat: repeat;
+  opacity: 0.02;
+  animation: static 0.5s steps(10) infinite;
+}
+
+.animate-slide-up        { animation: slide-up 0.6s ease-out forwards; }
+.animation-delay-200     { animation-delay: 0.2s; }
+.animation-fill-forwards { animation-fill-mode: forwards; }
+
+.underline-animation {
+  position: relative;
+}
+.underline-animation::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, #a259ff, #ff49db);
+  animation: draw-underline 0.8s ease-out forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  animation: gradient-move 4s ease infinite alternate;
+}
+
+/* .gradientText {
+  background-image: linear-gradient(
+    to right,
+    #a259ff 0%,
+    #ff49db 50%,
+    #f59e0b 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-move 4s ease infinite alternate;
+} */
+
+.blinking-cursor {
+  display: inline-block;
+  margin-left: 0.1em;
+  animation: blink 1s steps(2,start) infinite;
+}
+
+.nav-link:hover .underline,
+.nav-link.text-purple-400 .underline {
+  width: 100%;
+}
+
+.animate-bg-pan {
+  background-size: 200% 200%;
+  animation: bg-pan 6s ease infinite alternate;
+}
+
+@keyframes draw-underline {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+.gradient-border {
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(var(--base), var(--base)),
+    linear-gradient(to right, #a259ff, #ff49db, #f59e0b);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  animation: gradient-move 4s ease infinite alternate;
+}
+
+.bg-portfolio {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-from),
+    var(--gradient-via),
+    var(--gradient-to)
+  );
+  background-attachment: fixed;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 5) Header action button */
+/* ──────────────────────────────────────────────────────────────────────────── */
+.Header_ActionBtn {
+  position: relative;
+  border-radius: 0.2em;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.Header_ActionBtn::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(var(--primary))
+  );
+  animation: spin 5s linear infinite;
+}
+.Header_ActionBtn > div {
+  padding: 0.2em 1.35em;
+  background-color: var(--base);
+  color: var(--text);
+  border-radius: inherit;
+  margin: 2px;
+  z-index: 2;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 6) Hex-grid & hexagon tiles */
+/* ──────────────────────────────────────────────────────────────────────────── */
+.hex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 1.5rem;
+}
+.hexagon {
+  width: 100px;
+  height: 115px;
+  margin: 12px;
+  background: rgba(255,255,255,0.05);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hexagon img {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(30%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.hexagon span {
+  font-size: 0.75rem;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+.hexagon:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 12px rgba(255,255,255,0.4);
+}
+.hexagon:hover img { transform: scale(1.2); filter: grayscale(0%); }
+.hexagon:hover span { color: #fff; }
+.hexagon:nth-child(even) { margin-top: 50px; }
+
+@media (max-width: 640px) {
+  .hexagon { width: 80px; height: 92px; margin: 8px; }
+  .hexagon:nth-child(even) { margin-top: 40px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* 7) Hamburger & nav overlay */
+/* ──────────────────────────────────────────────────────────────────────────── */
+/* .MobileNav_Ham { position: relative; z-index: 70; transform-origin: center center; }
+.MobileNav_Ham .line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+  stroke-dasharray: 40 142;
+  stroke-dashoffset: 0;
+}
+.MobileNav_Ham.isOpen      { transform: rotate(45deg); }
+.MobileNav_Ham.isOpen .top    { stroke-dashoffset: -64; }
+.MobileNav_Ham.isOpen .middle { transform: rotate(90deg); }
+.MobileNav_Ham.isOpen .bottom { stroke-dasharray: 40 85; stroke-dashoffset: -64; }
+:has(.MobileNav_Ham.isOpen) body { overflow-y: hidden !important; }
+
+.nav-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+} */
+.MobileNav_Ham {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.4s;
+  user-select: none;
+}
+.MobileNav_Ham .line {
+  stroke: white;
+  fill: none;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  transform-origin: right;
+  transition: stroke-dasharray 0.4s, stroke-dashoffset 0.4s, transform 0.4s;
+}
+.MobileNav_Ham .top {
+  stroke-dasharray: 18 160;
+}
+.MobileNav_Ham .middle {
+  stroke-dasharray: 40 142;
+  transform-origin: 83% 83%;
+}
+.MobileNav_Ham .bottom {
+  stroke-dasharray: 18 85;
+  transform-origin: 50%;
+}
+.MobileNav_Ham.isOpen .top {
+  stroke-dashoffset: -64;
+}
+.MobileNav_Ham.isOpen .middle {
+  transform: rotate(90deg);
+}
+.MobileNav_Ham.isOpen .bottom {
+  stroke-dashoffset: -64;
+}
+
+
+
+/* Hero-specific styles
+@keyframes gradient-pan-linear {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-linear {
+  background: linear-gradient(
+    to right,
+    hsl(315,100%,50%),
+    hsl(264,100%,50%),
+    hsl(264,100%,50%),
+    hsl(315,100%,50%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-pan-linear 5s linear infinite;
+  will-change: background-position;
+} */
+
+.hero-3d-container {
+  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
+  cursor: pointer;
+}
+
+/* ───────────── GSAP Animation Utility Classes ───────────── */
+.Fade_Stagger,
+.Fade_Up {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.Fade_Down {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.Fade_In {
+  opacity: 0;
+}
+
+.Spring_Up {
+  opacity: 0;
+  scale: 0.75;
+}
+.Pop_In {
+  opacity: 0;
+  transform: scale(0.85);
+  visibility: hidden;
+}
+
+:root {
+	--primary: 264, 100%, 50%;
+	--secondary: 315, 100%, 50%;
+	--gradient: linear-gradient(
+		to right,
+		hsl(var(--secondary)),
+		hsl(var(--primary)),
+		hsl(var(--primary)),
+		hsl(var(--secondary))
+	);
+}
+
+.gradientText {
+	background: var(--gradient);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	background-size: 200%;
+	animation: gradientPan 5s linear infinite;
+	will-change: background-position;
+}
+
+@keyframes gradientPan {
+	0% {
+		background-position: 0%;
+	}
+	100% {
+		background-position: 200%;
+	}
+}
+

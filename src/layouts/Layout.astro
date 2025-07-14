@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Your Site</title>
+
+    <!-- Google Font: Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS styles -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+    />
+  </head>
+  <body id="home" class="overflow-x-hidden">
+    <slot />
+
+    <!-- Initialize AOS on client load -->
+ <script type="module" is:inline>
+    import AOS from 'aos';
+    import 'aos/dist/aos.css';
+
+    AOS.init({
+      duration: 600,
+      once: false,
+      offset: 100
+    });
+  </script>
+  </body>
+</html>
