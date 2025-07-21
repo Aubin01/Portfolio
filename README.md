@@ -53,14 +53,9 @@ npm install
 ```bash
 npm run dev
 ```
-
-## 📸 Preview
-
-
 ## 🧑‍💻 Author
-Aubin Mugisha
-Computer Science Graduate | Aspiring Software Engineer
-📫 LinkedIn: www.linkedin.com/in/aubin-mugisha
-📧 aubin.mugisha@maine.edu
+Aubin Mugisha|
+Computer Science Graduate | Aspiring Software Engineer |
+LinkedIn: www.linkedin.com/in/aubin-mugisha
 
 
