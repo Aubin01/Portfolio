@@ -1,0 +1,64 @@
+---
+/**
+ * Contact.astro
+ * Renders the Contact section with a Lottie animation and a contact form.
+ * The form submits to Formspree, and animations are triggered on scroll.
+ */
+
+import ContactAnimation from './ContactAnimation.jsx';
+import SectionHeader from './SectionHeader.jsx';
+---
+
+<section id="contact" class="relative w-full bg-black text-white px-6 py-40 font-sans">
+  <SectionHeader title="Contact" />
+
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Left Column: Animated illustration -->
+    <ContactAnimation client:only="react" />
+
+    <!-- Right Column: Contact form -->
+    <div class="backdrop-blur-md bg-white/5 rounded-xl p-8 shadow-lg">
+      <p class="text-lg text-gray-300 mb-2">
+        Have a project idea or just want to say hello? Fill out the form below.
+      </p>
+      <div class="h-px w-24 bg-purple-900 mb-6 rounded" />
+
+      <form
+        action="https://formspree.io/f/movwrzvd"
+        method="POST"
+        class="flex flex-col gap-4"
+      >
+        <input
+          name="name"
+          type="text"
+          placeholder="Name"
+          required
+          class="px-4 py-2 bg-white/10 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          class="px-4 py-2 bg-white/10 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+
+        <textarea
+          name="message"
+          rows="6"
+          placeholder="Your Message"
+          required
+          class="px-4 py-2 bg-white/10 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+
+        <button
+          type="submit"
+          class="mt-4 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md font-semibold text-white transition-all duration-300 ease-in-out hover:from-pink-500 hover:to-purple-500"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

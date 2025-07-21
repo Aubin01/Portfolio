@@ -1,0 +1,27 @@
+{
+  "frontEnd": [
+    { "name": "HTML", "link": "https://developer.mozilla.org/docs/Web/HTML" },
+    { "name": "CSS", "link": "https://developer.mozilla.org/docs/Web/CSS" },
+    { "name": "JavaScript", "link": "https://developer.mozilla.org/docs/Web/JavaScript" },
+    { "name": "Tailwind", "link": "https://tailwindcss.com/" },
+    { "name": "React.js", "link": "https://reactjs.org/" },
+    { "name": "Next.js", "link": "https://nextjs.org/" },
+    { "name": "GSAP", "link": "https://greensock.com/gsap/" }
+  ],
+  "backEnd": [
+    { "name": "Node.js", "link": "https://nodejs.org/" },
+    { "name": "MongoDB", "link": "https://mongodb.com/" },
+    { "name": "SQL", "link": "https://w3schools.com/sql" }
+  ],
+  "programming": [
+    { "name": "Java", "link": "https://oracle.com/java" },
+    { "name": "C", "link": "https://en.cppreference.com/w/c/language" },
+    { "name": "Python", "link": "https://python.org/" }
+  ],
+  "tools": [
+    { "name": "GitHub", "link": "https://github.com" },
+    { "name": "WordPress", "link": "https://wordpress.org" },
+    { "name": "Git", "link": "https://git-scm.com" },
+    { "name": "Figma", "link": "https://figma.com" }
+  ]
+}

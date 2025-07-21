@@ -1,8 +1,13 @@
+/**
+ * HeaderAnimation.jsx
+ * Renders a fixed desktop navigation header with animated active link highlighting.
+ * Tracks scroll position to update the active link and provides a resume download button.
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Download } from 'lucide-react';
 import Logo from '../assets/Logo.png';
 
-// Navigation items
 const navItems = [
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
@@ -11,8 +16,7 @@ const navItems = [
 ];
 
 /**
- * NavLink Component
- * Renders a navigation link with active indicator
+ * Renders a single navigation link with active styling and underline animation.
  */
 function NavLink({ href, label, isActive, onClick }) {
   return (
@@ -37,10 +41,10 @@ function NavLink({ href, label, isActive, onClick }) {
 }
 
 /**
- * Header Component
- * Renders a fixed top navigation bar with logo, nav links, and resume button
+ * Renders the main header with logo, navigation links, and a resume button.
+ * Uses scroll position to highlight the current section.
  */
-export default function Header() {
+export default function HeaderAnimation() {
   const [activeLink, setActiveLink] = useState('#home');
   const headerRef = useRef(null);
 
@@ -56,13 +60,15 @@ export default function Header() {
       '#contact': document.getElementById('contact'),
     };
 
-    // Throttled scroll handler to update active link
+    // Throttled scroll handler to update the active link
     const getScrollHandler = () => {
       let inThrottle = false;
       return () => {
         if (inThrottle) return;
         inThrottle = true;
+
         const headerHeight = headerEl.offsetHeight;
+
         Object.entries(sections).forEach(([href, section]) => {
           if (section) {
             const { top, bottom } = section.getBoundingClientRect();
@@ -71,13 +77,15 @@ export default function Header() {
             }
           }
         });
+
         setTimeout(() => (inThrottle = false), 100);
       };
     };
 
     const onScroll = getScrollHandler();
     window.addEventListener('scroll', onScroll);
-    onScroll();
+    onScroll(); // Set active link on initial load
+
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -88,7 +96,7 @@ export default function Header() {
       className="hidden lg:block fixed top-0 left-0 w-full h-20 z-50 bg-black backdrop-blur-sm"
     >
       <div className="flex items-center justify-between h-full px-6">
-        {/* Logo linking to home */}
+        {/* Logo */}
         <a
           href="#home"
           onClick={() => setActiveLink('#home')}
@@ -101,8 +109,12 @@ export default function Header() {
           />
         </a>
 
-        {/* Main navigation links */}
-        <nav role="navigation" aria-label="Main navigation" className="Fade_Down flex space-x-8 text-sm uppercase tracking-wider">
+        {/* Navigation Links */}
+        <nav
+          role="navigation"
+          aria-label="Main navigation"
+          className="Fade_Down flex space-x-8 text-sm uppercase tracking-wider"
+        >
           {navItems.map(({ name, href }) => (
             <NavLink
               key={href}
@@ -114,7 +126,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Resume button */}
+        {/* Resume Download Button */}
         <a
           href="/Resume.pdf"
           target="_blank"

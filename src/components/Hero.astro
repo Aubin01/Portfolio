@@ -1,0 +1,73 @@
+---
+/**
+ * Hero.astro
+ * Renders the hero section of the portfolio with animated text, social links, and a React-based animation.
+ */
+
+import HeroAnimation from './Heroj.jsx';
+import { Github, Linkedin, Mail } from 'lucide-react';
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen bg-black text-white font-sans px-6 py-8 flex flex-col-reverse lg:flex-row items-center justify-evenly gap-8"
+>
+  <div class="noise absolute inset-0 opacity-10" />
+
+  <div class="relative z-20 flex flex-col-reverse lg:flex-row items-center justify-evenly gap-8 w-full">
+    <!-- Left: Intro text and social links -->
+    <div class="flex flex-col gap-6 text-center lg:text-left w-full lg:w-auto">
+      <p class="Fade_Down text-gray-300 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+        Hi! My name is
+      </p>
+
+      <h1 class="Fade_Down text-[4rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-extrabold leading-tight gradientText">
+        Aubin.
+      </h1>
+
+      <p class="Fade_Down text-gray-300 text-lg sm:text-xl md:text-2xl lg:text-3xl">
+        I’m a Software Engineer.
+      </p>
+
+      <p class="Fade_Down text-gray-300 text-lg sm:text-xl md:text-2xl lg:text-3xl">
+        I create <span class="font-semibold gradientText">Exciting Stuff</span> on the Internet.
+      </p>
+
+      <!-- Social Icons -->
+      <div class="Fade_Down flex gap-6 justify-center lg:justify-start mt-2">
+        <a
+          href="https://github.com/Aubin01"
+          class="group p-3 rounded-full bg-white/10 backdrop-blur-sm transform transition hover:scale-110 hover:bg-gradient-to-tr hover:from-purple-500 hover:to-pink-400 duration-300 relative"
+        >
+          <Github className="w-6 h-6 text-white" />
+          <span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            GitHub
+          </span>
+        </a>
+
+        <a
+          href="https://linkedin.com/in/aubin-mugisha"
+          class="group p-3 rounded-full bg-white/10 backdrop-blur-sm transform transition hover:scale-110 hover:bg-gradient-to-tr hover:from-purple-500 hover:to-pink-400 duration-300 relative"
+        >
+          <Linkedin className="w-6 h-6 text-white" />
+          <span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            LinkedIn
+          </span>
+        </a>
+
+        <a
+          href="mailto:aubin.mugisha@maine.edu"
+          class="group p-3 rounded-full bg-white/10 backdrop-blur-sm transform transition hover:scale-110 hover:bg-gradient-to-tr hover:from-purple-500 hover:to-pink-400 duration-300 relative"
+        >
+          <Mail className="w-6 h-6 text-white" />
+          <span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Email
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Lottie animation (React) -->
+    <HeroAnimation client:only="react" />
+  </div>
+</section>

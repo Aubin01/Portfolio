@@ -1,7 +1,14 @@
+/**
+ * MobileHeaderAnimation.jsx
+ * Renders a mobile navigation header with a GSAP-powered animated menu overlay.
+ * Uses clip-path animation for open/close and prevents scrolling when open.
+ */
+
 import React, { useState, useEffect, useRef } from "react";
 import { Download } from "lucide-react";
-import Cheeseburger  from "./HamMenu";
+import Cheeseburger from "./HamMenu";
 import { gsap } from "gsap";
+import Logo from '../assets/Logo.png';
 
 const navLinks = [
   { name: "ABOUT", href: "#about" },
@@ -10,8 +17,9 @@ const navLinks = [
   { name: "CONTACT", href: "#contact" },
 ];
 
-export default function MobileHeader() {
+export default function MobileHeaderAnimation() {
   const [open, setOpen] = useState(false);
+
   const [clip, setClip] = useState(
     `circle(30px at ${window.innerWidth + 30}px -30px)`
   );
@@ -21,11 +29,15 @@ export default function MobileHeader() {
   const menuTl = useRef();
   const linkTl = useRef();
 
+  // Generates closed-state clip path (small circle off-screen)
   const closedClip = () =>
     `circle(30px at ${window.innerWidth + 30}px -30px)`;
+
+  // Generates open-state clip path (large circle from top-left)
   const openClip = () =>
     `circle(${window.innerHeight * 2 + 200}px at 40px 40px)`;
 
+  // Initialize GSAP animations
   useEffect(() => {
     const navEl = navRef.current;
     const itemEls = itemsRef.current;
@@ -56,6 +68,7 @@ export default function MobileHeader() {
       );
   }, []);
 
+  // Handle menu open/close toggle and scroll lock
   useEffect(() => {
     if (open) {
       menuTl.current.play();
@@ -73,32 +86,32 @@ export default function MobileHeader() {
   return (
     <header className="lg:hidden fixed top-0 left-0 w-screen h-14 z-[70] bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm text-white">
       <div className="flex items-center justify-between h-full px-4">
-        <a href="#home" className="font-satisfy">
-          <span className="gradientText inline-block w-fit text-2xl font-bold font-cursive">
-            {"<Portfolio/>"}
-            <span className="blinking-cursor">|</span>
-          </span>
+        <a href="#home" onClick={() => setOpen(false)} aria-label="Home">
+          <img
+            src={Logo.src}
+            alt="Aubin Logo"
+            className="h-28 w-auto object-contain"
+          />
         </a>
 
-        {/* Hamburger Icon */}
-       <div
-  className="z-[100] w-12 h-12 flex items-center justify-center cursor-pointer"
-  onClick={() => setOpen((o) => !o)}
->
-  <Cheeseburger
-    isToggled={open}
-    color="white"
-    width={35}
-    height={35}
-    strokeWidth={2}
-    rounded
-    slick
-  />
-</div>
-
+        {/* Hamburger menu toggle button */}
+        <div
+          className="z-[100] w-12 h-12 flex items-center justify-center cursor-pointer"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <Cheeseburger
+            isToggled={open}
+            color="white"
+            width={35}
+            height={35}
+            strokeWidth={2}
+            rounded
+            slick
+          />
+        </div>
       </div>
 
-      {/* Navigation Overlay */}
+      {/* Clip-path overlay navigation menu */}
       <nav
         ref={navRef}
         className={`nav-overlay fixed inset-0 w-screen h-screen bg-[#2c026e]/80 flex flex-col items-center justify-center gap-6 z-[60] overflow-hidden ${
@@ -120,26 +133,23 @@ export default function MobileHeader() {
           </a>
         ))}
 
-        {/* Resume Button */}
-<a
-  href="/Resume.pdf"
-  target="_blank"
-  rel="noreferrer"
-  onClick={() => setOpen(false)}
-  ref={(el) => (itemsRef.current[navLinks.length] = el)}
-  className="group relative min-w-[14em] bg-black rounded-md py-4 px-6 flex items-center justify-center gap-2 text-xl font-medium text-white transition-colors duration-300 hover:bg-black/75"
-  style={{
-    border: "2px solid transparent",
-    borderImage: "linear-gradient(90deg, hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--primary)), hsl(var(--secondary))) 1",
-  }}
->
-  <span className="gradientText">Resume</span>
-  <Download size={20} className="text-white" />
-</a>
-
-
-
-
+        {/* Resume download button */}
+        <a
+          href="/Resume.pdf"
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setOpen(false)}
+          ref={(el) => (itemsRef.current[navLinks.length] = el)}
+          className="group relative min-w-[14em] bg-black rounded-md py-4 px-6 flex items-center justify-center gap-2 text-xl font-medium text-white transition-colors duration-300 hover:bg-black/75"
+          style={{
+            border: "2px solid transparent",
+            borderImage:
+              "linear-gradient(90deg, hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--primary)), hsl(var(--secondary))) 1",
+          }}
+        >
+          <span className="gradientText">Resume</span>
+          <Download size={20} className="text-white" />
+        </a>
       </nav>
     </header>
   );

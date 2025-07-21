@@ -4,37 +4,71 @@ import '../styles/global.css';
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Character encoding -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Your Site</title>
 
-    <!-- Google Font: Poppins -->
+    <!-- Responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon3.png" />
+
+    <!-- Astro generator tag -->
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>Aubin Mugisha | Software Developer Portfolio</title>
+    <meta name="title" content="Aubin Mugisha | Software Developer Portfolio" />
+    <meta name="description" content="The personal portfolio of Aubin Mugisha — showcasing skills in React, Python, AI, and cloud development. Explore projects, skills, and contact info." />
+    <meta name="author" content="Aubin Mugisha" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Aubin Mugisha, software developer, React, Python, cloud engineer, portfolio, USM AIIR Lab" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aubin.com/" />
+    <meta property="og:title" content="Aubin Mugisha | Software Developer Portfolio" />
+    <meta property="og:description" content="Explore the projects and skills of Aubin Mugisha, a passionate developer in React, Python, and cloud." />
+    <!-- <meta property="og:image" content="/preview.jpg" /> -->
+
+    <!-- Linkedin -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aubin.com/" />
+    <meta property="og:title" content="Aubin Mugisha | Software Developer Portfolio" />
+    <meta property="og:description" content="Explore the projects and skills of Aubin Mugisha, a passionate developer in React, Python, and cloud." />
+    <!-- <meta property="og:image" content="/preview.jpg" /> -->
+
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#0f0f0f" />
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- AOS styles -->
+    <!-- AOS scroll animation styles -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/aos@2.3.4/dist/aos.css"
     />
   </head>
-  <body id="home" class="overflow-x-hidden">
+
+  <body id="home" class="overflow-x-hidden text-white bg-black font-sans antialiased">
     <slot />
 
-    <!-- Initialize AOS on client load -->
- <script type="module" is:inline>
-    import AOS from 'aos';
-    import 'aos/dist/aos.css';
-
-    AOS.init({
-      duration: 600,
-      once: false,
-      offset: 100
-    });
-  </script>
+    <!-- AOS Scroll Animation Init -->
+    <script type="module" is:inline>
+      import AOS from 'aos';
+      import 'aos/dist/aos.css';
+      AOS.init({
+        duration: 600,
+        once: false,
+        offset: 100,
+      });
+    </script>
   </body>
 </html>

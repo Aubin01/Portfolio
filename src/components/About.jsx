@@ -1,3 +1,9 @@
+/**
+ * About.tsx
+ * Displays the "About" section with animated avatar, intro text, counters, and a timeline.
+ * Includes framer-motion and AOS animations.
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import AOS from 'aos';
@@ -6,8 +12,8 @@ import SectionHeader from '../components/SectionHeader.jsx';
 import AvatarUrl from '../assets/profile.jpg?url';
 
 /**
- * Custom hook to animate a number counter from 0 to target
- * only when startCounting is true (e.g., when in view).
+ * Custom hook to animate a counter from 0 to target
+ * when triggered (e.g., when component is in view).
  */
 function useCountUp(target, duration = 1.5, startCounting = false) {
   const [count, setCount] = useState(0);
@@ -28,13 +34,13 @@ function useCountUp(target, duration = 1.5, startCounting = false) {
   return count;
 }
 
-// Framer Motion fade-up variant for paragraph animation
+// Motion variant for fade-up animations
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-// Statistics data
+// Stats for animated counters
 const stats = [
   { label: 'Projects Built', value: 12 },
   { label: 'Tech Stacks Learned', value: 10 },
@@ -50,12 +56,11 @@ const timeline = [
 ];
 
 export default function About() {
-  // Initialize AOS on mount
+  // Initialize AOS once on mount
   useEffect(() => {
     AOS.init({ duration: 600, offset: 100, once: true });
   }, []);
 
-  // Track when counter section is in view
   const counterRef = useRef(null);
   const isInView = useInView(counterRef, { once: true });
 
@@ -64,15 +69,13 @@ export default function About() {
       id="about"
       className="bg-black text-white py-16 font-sans px-4 sm:px-6 lg:px-8"
     >
-      {/* Section title with lines */}
       <SectionHeader title="About" />
 
-      {/* Avatar & Introduction */}
+      {/* Avatar and Intro */}
       <div
         className="max-w-3xl mx-auto flex flex-col lg:flex-row items-center gap-8"
         data-aos="fade-up"
       >
-        {/* Avatar with floating animation */}
         <div className="flex-shrink-0">
           <div className="rounded-full p-1 bg-purple-900">
             <motion.img
@@ -85,7 +88,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Animated intro paragraph */}
         <motion.div
           className="flex-1 text-justify text-base sm:text-lg text-gray-300"
           initial="hidden"
@@ -103,7 +105,7 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Animated Counters (triggered on scroll) */}
+      {/* Animated Counters */}
       <div
         ref={counterRef}
         className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
@@ -125,27 +127,22 @@ export default function About() {
         })}
       </div>
 
-      {/* Timeline Section */}
+      {/* Timeline */}
       <div
         className="mt-12 max-w-3xl mx-auto"
         data-aos="fade-up"
         data-aos-delay="300"
       >
         <div className="relative pl-4 sm:pl-6">
-          {/* Vertical line running through timeline */}
           <span className="absolute left-0 top-0 bottom-0 w-px bg-purple-900" />
-
           <h3 className="text-2xl sm:text-3xl font-bold text-purple-500 mb-6">
             My Journey
           </h3>
 
-          {/* Timeline entries */}
           <div className="space-y-6">
             {timeline.map(({ year, event }) => (
               <div key={year} className="relative pl-8">
-                {/* Dot */}
                 <div className="absolute left-0 top-2 w-4 h-4 rounded-full border-2 border-purple-500 bg-black" />
-                {/* Text */}
                 <time className="block font-semibold text-lg sm:text-xl mb-1 text-white">
                   {year}
                 </time>
