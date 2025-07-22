@@ -1,7 +1,6 @@
 /**
  * HeaderAnimation.jsx
- * Renders a fixed desktop navigation header with animated active link highlighting.
- * Tracks scroll position to update the active link and provides a resume download button.
+ * Renders a fixed desktop navigation header
  */
 
 import React, { useState, useEffect, useRef } from 'react';

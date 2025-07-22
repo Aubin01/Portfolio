@@ -1,6 +1,6 @@
 /**
  * HeroAnimation.jsx
- * Renders a Lottie coding animation with 3D tilt effect and scroll progress bar.
+ * Renders a Lottie coding animation with 3D tilt effect.
  * Includes client-only animation and scroll utilities, and supports play/pause on click.
  */
 
@@ -16,34 +16,11 @@ export default function HeroAnimation() {
   useEffect(() => {
     initializeAnimations();
     initializeSmoothScroll();
-
-    // Update scroll progress bar width
-    const progressEl = document.getElementById('scrollProgress');
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      if (progressEl && docHeight > 0) {
-        progressEl.style.width = `${(scrollTop / docHeight) * 100}%`;
-      }
-    };
-
-    window.addEventListener('scroll', updateProgress);
-    updateProgress();
-
-    return () => {
-      window.removeEventListener('scroll', updateProgress);
-    };
   }, []);
 
   return (
     <>
-      {/* Scroll progress bar at top */}
-      <div
-        id="scrollProgress"
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 z-50 w-0"
-      />
-
-      {/* Animated container with 3D tilt effect and click-to-toggle Lottie animation */}
+      {/* Lottie container with 3D tilt and click-to-toggle pause/play */}
       <div
         className="Fade_Down hero-3d-container relative w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] flex items-center justify-center"
         onMouseMove={(e) => {

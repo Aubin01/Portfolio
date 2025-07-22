@@ -40,7 +40,7 @@ export default function Footer() {
         {/* Logo */}
         <div className="mb-2">
           <a href="#home" aria-label="Go to top of page">
-            <img src={Logo.src} alt="Aubin Logo" className="h-28 w-auto" />
+            <img src={Logo.src} alt="Aubin Logo" className="h-36 w-auto" />
           </a>
         </div>
 

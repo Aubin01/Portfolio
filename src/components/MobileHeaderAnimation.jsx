@@ -24,10 +24,10 @@ export default function MobileHeaderAnimation() {
     `circle(30px at ${window.innerWidth + 30}px -30px)`
   );
 
-  const navRef = useRef(null);         // Reference to nav container (clip-path)
-  const itemsRef = useRef([]);         // Reference to nav link elements
-  const menuTl = useRef();             // GSAP timeline for clip-path animation
-  const linkTl = useRef();             // GSAP timeline for nav link animation
+  const navRef = useRef(null);         
+  const itemsRef = useRef([]);        
+  const menuTl = useRef();             
+  const linkTl = useRef();
 
   // Closed clip-path: small circle off-screen
   const closedClip = () =>
@@ -76,20 +76,20 @@ export default function MobileHeaderAnimation() {
     const navEl = navRef.current;
 
     if (open) {
-      gsap.set(navEl, { display: "flex" });         // Make visible
-      menuTl.current.play();                        // Animate open
-      linkTl.current.play();                        // Animate links
-      setClip(openClip());                          // Set clip-path
-      document.body.style.overflow = "hidden";      // Disable scroll
+      gsap.set(navEl, { display: "flex" });         
+      menuTl.current.play();                        
+      linkTl.current.play();                        
+      setClip(openClip());                       
+      document.body.style.overflow = "hidden";      
     } else {
-      linkTl.current.reverse();                     // Reverse link animation
-      menuTl.current.reverse();                     // Reverse clip-path
+      linkTl.current.reverse();                    
+      menuTl.current.reverse();                 
 
       // Wait for animation to finish, then hide and clean up
       menuTl.current.eventCallback("onReverseComplete", () => {
         gsap.set(navEl, { display: "none" });
         setClip(closedClip());
-        document.body.style.overflow = "auto";      // Re-enable scroll
+        document.body.style.overflow = "auto";  
       });
     }
   }, [open]);

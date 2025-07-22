@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  * A reusable section header with horizontal lines on both sides of the title.
- * Includes padding for spacing and responsiveness.
+ * 
  */
 export default function SectionHeader({ title }) {
   return (
