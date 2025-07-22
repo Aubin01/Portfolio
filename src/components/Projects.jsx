@@ -8,7 +8,7 @@ import React from 'react';
 import { ExternalLinkIcon, WrenchIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionHeader from '../components/SectionHeader.jsx';
-import projectData from '../data/projects.json'; // 🔗 Import external JSON data
+import projectData from '../data/Projects.json'; // 🔗 Import external JSON data
 
 // Animation variants
 const containerVariants = {
@@ -28,7 +28,7 @@ const itemVariants = {
 /**
  * Renders an individual project card.
  */
-function ProjectCard({ name, status, link, description, tech }) {
+function ProjectCard({ name, status, link, description, tech , thumbnail }) {
   return (
     <motion.li
       className="relative bg-white/5 rounded-lg overflow-hidden"
