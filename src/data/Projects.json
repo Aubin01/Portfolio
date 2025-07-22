@@ -5,7 +5,7 @@
     "link": "#",
     "description": "This project is under active development.",
     "tech": ["React", "Tailwind CSS", "HTML5"],
-    "thumbnail": "/assets/thumbnails/demo-app.png"
+    "thumbnail": "/thumbnails/demo-app.png"
   },
   {
     "name": "Portfolio Site",
@@ -13,7 +13,7 @@
     "link": "#",
     "description": "Personal portfolio built with modern web tech.",
     "tech": ["React", "Tailwind CSS", "HTML5"],
-    "thumbnail": "/assets/thumbnails/demo-app.png"
+    "thumbnail": "/thumbnails/demo-app.png"
   },
   {
     "name": "Coming Soon",
@@ -21,6 +21,6 @@
     "link": "#",
     "description": "New project launching soon.",
     "tech": ["React", "Tailwind CSS"],
-    "thumbnail": "/assets/thumbnails/demo-app.png"
+    "thumbnail": "/thumbnails/demo-app.png"
   }
 ]

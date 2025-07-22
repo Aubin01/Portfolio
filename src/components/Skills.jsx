@@ -7,7 +7,7 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import SectionHeader from '../components/SectionHeader';
-import skillData from '../data/skills.json';
+import skillData from '../data/Skills.json';
 
 // Icon imports (must match skill name exactly)
 import htmlIcon from '../assets/icons/html.svg?url';

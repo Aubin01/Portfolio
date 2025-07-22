@@ -36,10 +36,15 @@ function ProjectCard({ name, status, link, description, tech , thumbnail }) {
       role="listitem"
     >
       {/* Placeholder for screenshot */}
-      <div className="w-full h-48 bg-gray-800 flex items-center justify-center">
-        <span className="sr-only">Screenshot for {name}</span>
-        <span className="text-gray-400">Screenshot Preview</span>
-      </div>
+     <div className="w-full h-48 overflow-hidden bg-gray-800">
+      <img
+    src={thumbnail}
+    alt={`Screenshot of ${name}`}
+    className="w-full h-full object-cover"
+    loading="lazy"
+      />
+     </div>
+
 
       {/* Project details */}
       <div className="p-4 flex flex-col justify-between h-56">
