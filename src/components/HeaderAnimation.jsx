@@ -15,9 +15,6 @@ const navItems = [
   { name: 'Contact', href: '#contact' },
 ];
 
-/**
- * Renders a single navigation link with active styling and underline animation.
- */
 function NavLink({ href, label, isActive, onClick }) {
   return (
     <a
@@ -40,10 +37,6 @@ function NavLink({ href, label, isActive, onClick }) {
   );
 }
 
-/**
- * Renders the main header with logo, navigation links, and a resume button.
- * Uses scroll position to highlight the current section.
- */
 export default function HeaderAnimation() {
   const [activeLink, setActiveLink] = useState('#home');
   const headerRef = useRef(null);
@@ -52,41 +45,45 @@ export default function HeaderAnimation() {
     const headerEl = headerRef.current;
     if (!headerEl) return;
 
-    const sections = {
-      '#home': document.getElementById('home'),
-      '#about': document.getElementById('about'),
-      '#skills': document.getElementById('skills'),
-      '#projects': document.getElementById('projects'),
-      '#contact': document.getElementById('contact'),
-    };
-
-    // Throttled scroll handler to update the active link
-    const getScrollHandler = () => {
-      let inThrottle = false;
-      return () => {
-        if (inThrottle) return;
-        inThrottle = true;
-
-        const headerHeight = headerEl.offsetHeight;
-
-        Object.entries(sections).forEach(([href, section]) => {
-          if (section) {
-            const { top, bottom } = section.getBoundingClientRect();
-            if (top <= headerHeight && bottom >= headerHeight) {
-              setActiveLink(href);
-            }
-          }
-        });
-
-        setTimeout(() => (inThrottle = false), 100);
+    const initScrollTracking = () => {
+      const sections = {
+        '#home': document.getElementById('home'),
+        '#about': document.getElementById('about'),
+        '#skills': document.getElementById('skills'),
+        '#projects': document.getElementById('projects'),
+        '#contact': document.getElementById('contact'),
       };
+
+      const getScrollHandler = () => {
+        let inThrottle = false;
+        return () => {
+          if (inThrottle) return;
+          inThrottle = true;
+
+          const headerHeight = headerEl.offsetHeight;
+
+          Object.entries(sections).forEach(([href, section]) => {
+            if (section) {
+              const { top, bottom } = section.getBoundingClientRect();
+              if (top <= headerHeight && bottom >= headerHeight) {
+                setActiveLink(href);
+              }
+            }
+          });
+
+          setTimeout(() => (inThrottle = false), 100);
+        };
+      };
+
+      const onScroll = getScrollHandler();
+      window.addEventListener('scroll', onScroll);
+      onScroll(); // Run once on load
+
+      return () => window.removeEventListener('scroll', onScroll);
     };
 
-    const onScroll = getScrollHandler();
-    window.addEventListener('scroll', onScroll);
-    onScroll(); // Set active link on initial load
-
-    return () => window.removeEventListener('scroll', onScroll);
+    // Wait for DOM render before accessing section elements
+    setTimeout(() => requestAnimationFrame(initScrollTracking), 0);
   }, []);
 
   return (
