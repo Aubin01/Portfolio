@@ -1,15 +1,16 @@
 /**
  * MobileHeaderAnimation.jsx
  * Renders a mobile navigation header with a GSAP-powered animated menu overlay.
- * Uses clip-path animation for open/close and prevents scrolling when open.
+ * Uses clip-path animation for open/close and properly resets the state on close.
  */
 
 import React, { useState, useEffect, useRef } from "react";
 import { Download } from "lucide-react";
-import Cheeseburger from "./HamMenu";
 import { gsap } from "gsap";
-import Logo from '../assets/Logo.png';
+import Cheeseburger from "./HamMenu";
+import Logo from "../assets/Logo.png";
 
+// List of nav links to display in mobile menu
 const navLinks = [
   { name: "ABOUT", href: "#about" },
   { name: "SKILLS", href: "#skills" },
@@ -18,32 +19,33 @@ const navLinks = [
 ];
 
 export default function MobileHeaderAnimation() {
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(false); // Tracks open/closed state
   const [clip, setClip] = useState(
     `circle(30px at ${window.innerWidth + 30}px -30px)`
   );
 
-  const navRef = useRef(null);
-  const itemsRef = useRef([]);
-  const menuTl = useRef();
-  const linkTl = useRef();
+  const navRef = useRef(null);         // Reference to nav container (clip-path)
+  const itemsRef = useRef([]);         // Reference to nav link elements
+  const menuTl = useRef();             // GSAP timeline for clip-path animation
+  const linkTl = useRef();             // GSAP timeline for nav link animation
 
-  // Generates closed-state clip path (small circle off-screen)
+  // Closed clip-path: small circle off-screen
   const closedClip = () =>
     `circle(30px at ${window.innerWidth + 30}px -30px)`;
 
-  // Generates open-state clip path (large circle from top-left)
+  // Open clip-path: large circle from top-left
   const openClip = () =>
     `circle(${window.innerHeight * 2 + 200}px at 40px 40px)`;
 
-  // Initialize GSAP animations
+  // Initialize GSAP animations once on mount
   useEffect(() => {
     const navEl = navRef.current;
     const itemEls = itemsRef.current;
 
-    gsap.set(navEl, { clipPath: closedClip() });
+    // Start hidden
+    gsap.set(navEl, { clipPath: closedClip(), display: "none" });
 
+    // Background circle expansion animation
     menuTl.current = gsap
       .timeline({ paused: true })
       .to(navEl, {
@@ -52,6 +54,7 @@ export default function MobileHeaderAnimation() {
         ease: "power1.out",
       });
 
+    // Staggered links entrance animation
     linkTl.current = gsap
       .timeline({ paused: true })
       .fromTo(
@@ -68,23 +71,32 @@ export default function MobileHeaderAnimation() {
       );
   }, []);
 
-  // Handle menu open/close toggle and scroll lock
+  // Toggle menu open/close and control scroll + visibility
   useEffect(() => {
+    const navEl = navRef.current;
+
     if (open) {
-      menuTl.current.play();
-      linkTl.current.play();
-      setClip(openClip());
-      document.body.style.overflow = "hidden";
+      gsap.set(navEl, { display: "flex" });         // Make visible
+      menuTl.current.play();                        // Animate open
+      linkTl.current.play();                        // Animate links
+      setClip(openClip());                          // Set clip-path
+      document.body.style.overflow = "hidden";      // Disable scroll
     } else {
-      linkTl.current.reverse();
-      menuTl.current.reverse();
-      setClip(closedClip());
-      document.body.style.overflow = "auto";
+      linkTl.current.reverse();                     // Reverse link animation
+      menuTl.current.reverse();                     // Reverse clip-path
+
+      // Wait for animation to finish, then hide and clean up
+      menuTl.current.eventCallback("onReverseComplete", () => {
+        gsap.set(navEl, { display: "none" });
+        setClip(closedClip());
+        document.body.style.overflow = "auto";      // Re-enable scroll
+      });
     }
   }, [open]);
 
   return (
     <header className="lg:hidden fixed top-0 left-0 w-screen h-14 z-[70] bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm text-white">
+      {/* Top bar with logo and hamburger */}
       <div className="flex items-center justify-between h-full px-4">
         <a href="#home" onClick={() => setOpen(false)} aria-label="Home">
           <img
@@ -94,10 +106,10 @@ export default function MobileHeaderAnimation() {
           />
         </a>
 
-        {/* Hamburger menu toggle button */}
+        {/* Hamburger button */}
         <div
           className="z-[100] w-12 h-12 flex items-center justify-center cursor-pointer"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpen((prev) => !prev)}
         >
           <Cheeseburger
             isToggled={open}
@@ -111,14 +123,13 @@ export default function MobileHeaderAnimation() {
         </div>
       </div>
 
-      {/* Clip-path overlay navigation menu */}
+      {/* Clip-path overlay navigation */}
       <nav
         ref={navRef}
-        className={`nav-overlay fixed inset-0 w-screen h-screen bg-[#2c026e]/80 flex flex-col items-center justify-center gap-6 z-[60] overflow-hidden ${
-          open ? "open" : ""
-        }`}
+        className="nav-overlay fixed inset-0 w-screen h-screen bg-[#2c026e]/80 flex-col items-center justify-center gap-6 z-[60] overflow-hidden"
         style={{ clipPath: clip }}
       >
+        {/* Nav links */}
         {navLinks.map((link, i) => (
           <a
             key={link.href}
@@ -133,7 +144,7 @@ export default function MobileHeaderAnimation() {
           </a>
         ))}
 
-        {/* Resume download button */}
+        {/* Resume button */}
         <a
           href="/Resume.pdf"
           target="_blank"
