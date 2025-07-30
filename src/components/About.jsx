@@ -9,7 +9,7 @@ import { motion, useInView } from 'framer-motion';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SectionHeader from '../components/SectionHeader.jsx';
-import AvatarUrl from '../assets/profile.jpg?url';
+import AvatarUrl from '../assets/profile.png?url';
 
 /**
  * Custom hook to animate a counter from 0 to target
@@ -81,7 +81,7 @@ export default function About() {
             <motion.img
               src={AvatarUrl}
               alt="Aubin avatar"
-              className="rounded-full w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 shadow-lg"
+              className="rounded-full w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 object-cover object-top shadow-lg"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             />
