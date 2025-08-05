@@ -52,7 +52,7 @@ const timeline = [
   { year: '2022', event: 'Started my Computer Science journey at university' },
   { year: '2023', event: 'Completed my first internship and built my first real-world app' },
   { year: '2024', event: 'Took on a second internship focusing on full-stack development' },
-  { year: '2025', event: 'Graduated with a BSc in Computer Science and launched this portfolio' },
+  { year: '2025', event: 'Currently working as a student researcher and building LLMs. And will graduate with a BSc in Computer Science later in December this year' },
 ];
 
 export default function About() {
@@ -96,7 +96,7 @@ export default function About() {
           variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
         >
           <motion.p variants={fadeUp} className="leading-relaxed">
-            I’m a recent Computer Science graduate with a passion for technology
+            I’m a Computer Science student at the University of Southern Maine, graduating in December 2025. I have a passion for technology
             and continuous learning. I enjoy solving real-world problems through
             code and am actively building my skills through hands-on projects.
             Early in my career, I’m eager to contribute, grow, and make an
