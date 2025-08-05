@@ -55,7 +55,7 @@ npm run dev
 ```
 ## 🧑‍💻 Author
 Aubin Mugisha|
-Computer Science Graduate | Aspiring Software Engineer |
+Computer Science Student | Aspiring Software Engineer |
 LinkedIn: www.linkedin.com/in/aubin-mugisha
 
 
