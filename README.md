@@ -2,7 +2,7 @@
 
 Welcome to the source code of my personal portfolio website, built to showcase my projects, skills, and background as a software developer. The site is fast, responsive, animated, and optimized for SEO and accessibility.
 
-🌐 Live Website: [aubin.dev](https://your-live-url.com)
+🌐 Live Website: [aubinm](https://aubinm.netlify.app)
 
 ---
 
@@ -55,7 +55,7 @@ npm run dev
 ```
 ## 🧑‍💻 Author
 Aubin Mugisha|
-Computer Science Graduate | Aspiring Software Engineer |
+Computer Science Student | Aspiring Software Engineer |
 LinkedIn: www.linkedin.com/in/aubin-mugisha
 
 
