@@ -1,19 +1,19 @@
 [
   {
-    "name": "Demo App",
-    "status": "development",
-    "link": "#",
-    "description": "This project is under active development.",
-    "tech": ["React", "Tailwind CSS", "HTML5"],
-    "thumbnail": "/thumbnails/demo-app.png"
+    "name": "MathMex Text Simplification",
+    "status": "completed",
+    "link": "https://mathmex.com",
+    "description": "Developed NLP-based simplification component for mathematical expression search engine to improve content accessibility.",
+    "tech": ["Python", "NLP", "Data Annotation", "Machine Learning"],
+    "thumbnail": "/thumbnails/mathmex.png"
   },
   {
     "name": "Portfolio Site",
-    "status": "development",
-    "link": "#",
-    "description": "Personal portfolio built with modern web tech.",
-    "tech": ["React", "Tailwind CSS", "HTML5"],
-    "thumbnail": "/thumbnails/demo-app.png"
+    "status": "completed",
+    "link": "https://github.com/Aubin01/Portfolio",
+    "description": "Personal portfolio built with modern web tech featuring responsive design, animations, and optimized performance.",
+    "tech": ["Astro", "React", "Tailwind CSS", "Framer Motion"],
+    "thumbnail": "/thumbnails/portfolio.png"
   },
   {
     "name": "Coming Soon",

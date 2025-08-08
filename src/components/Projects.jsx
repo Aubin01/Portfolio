@@ -31,9 +31,13 @@ const itemVariants = {
 function ProjectCard({ name, status, link, description, tech , thumbnail }) {
   return (
     <motion.li
-      className="relative bg-white/5 rounded-lg overflow-hidden"
+      className="relative bg-white/5 rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
       variants={itemVariants}
       role="listitem"
+      whileHover={{ 
+        scale: 1.05,
+        transition: { duration: 0.2, ease: "easeOut" }
+      }}
     >
       {/* Placeholder for screenshot */}
      <div className="w-full h-48 overflow-hidden bg-gray-800">
